@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6b28c405-f908-421a-90a9-7d11742407f6" created="3.5.0" activeEnvironment="Default environment" name="PRJT_WHServices" updated="3.5.0 2020-11-11T18:12:01Z" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:interface xsi:type="con:RestService" id="765d36ba-0d34-4b96-ad7b-aab64263b9f8" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:9001" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:settings/>
+    <con:definitionCache/>
+    <con:endpoints>
+      <con:endpoint>http://localhost:9001</con:endpoint>
+    </con:endpoints>
+    <con:resource name="Departments" path="/departments/" id="40d20676-88d9-4cd2-9a6c-8fe168e6aecf">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="Departments" id="c0a6675c-0b4d-4589-9b55-8bb231c3a7f3" method="POST">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="REQUEST">
+          <con:mediaType>application/json</con:mediaType>
+          <con:params/>
+        </con:representation>
+        <con:representation type="FAULT">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>404</con:status>
+          <con:params/>
+          <con:element xmlns:dep="http://localhost/departments">dep:Fault</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:dep="http://localhost/departments">dep:Response</con:element>
+        </con:representation>
+        <con:request name="rqstPost_Department" id="2ab9b1bc-d161-4e01-adee-96e3811678f7" mediaType="application/json" postQueryString="false">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://localhost:9001</con:endpoint>
+          <con:request>{
+	   "departmentName": "IT - SQA",
+        "departmentAddress": "123 4TH Avenue",
+        "departmentCode": "IT-007"
+        
+}</con:request>
+          <con:originalUri>http://localhost/departments</con:originalUri>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+  </con:interface>
+  <con:interface xsi:type="con:RestService" id="5f84c672-4627-4b10-ab2c-4844e9ccd056" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:9001 1" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:settings/>
+    <con:definitionCache/>
+    <con:endpoints>
+      <con:endpoint>http://localhost:9001</con:endpoint>
+    </con:endpoints>
+    <con:resource name="DepartmentEndPoint" path="/departments/{ID}" id="5be7876e-db9a-41d2-a87f-3561bb52962f">
+      <con:settings/>
+      <con:parameters>
+        <con:parameter>
+          <con:name>ID</con:name>
+          <con:value>3</con:value>
+          <con:style>TEMPLATE</con:style>
+          <con:default>3</con:default>
+        </con:parameter>
+      </con:parameters>
+      <con:method name="GetMethod" id="1381cdab-8b45-451e-9dc8-14b4dd942e38" method="GET">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="FAULT">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>405</con:status>
+          <con:params/>
+          <con:element xmlns:dep="http://localhost/departments/">dep:Fault</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:dep="http://localhost/departments/">dep:Response</con:element>
+        </con:representation>
+        <con:request name="rqstGET_byDepartmentID" id="feb7fbc5-a14e-48c8-a837-dfdfac0f5e4c" mediaType="application/json">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://localhost:9001</con:endpoint>
+          <con:request/>
+          <con:originalUri>http://localhost/departments/</con:originalUri>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:parameters>
+            <con:entry key="ID" value="2"/>
+          </con:parameters>
+          <con:parameterOrder>
+            <con:entry>ID</con:entry>
+          </con:parameterOrder>
+        </con:request>
+      </con:method>
+    </con:resource>
+  </con:interface>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer/>
+  <con:jmsConnectionContainer/>
+  <con:oAuth2ProfileContainer/>
+  <con:oAuth1ProfileContainer/>
+  <con:reporting>
+    <con:xmlTemplates/>
+    <con:parameters/>
+  </con:reporting>
+  <con:eventHandlers type="RequestFilter.filterRequest" name="RequestFilter.filterRequest">
+    <con:script>// Sample event script to add custom HTTP header to all outgoing REST, SOAP and HTTP(S) calls
+// This code is often used for adding custom authentication to ReadyAPI functional tests
+
+// If hardcoding the token, uncomment and change line 5
+// token = '4567'
+
+// If your token is parameterized in Project level custom property, uncomment line 8
+// token = request.parent.testCase.testSuite.project.getProperty('auth_token').getValue()
+
+// To modify all outgoing calls, remove comments from lines 11 to 16
+// headers = request.requestHeaders
+// if (headers.containsKey('auth_token2') == false) {
+//   headers.put('auth_token2', token)
+//   request.requestHeaders = headers
+// }</con:script>
+  </con:eventHandlers>
+  <con:eventHandlers type="TestRunListener.afterStep" name="TestRunListener.afterStep">
+    <con:script>// Save all test step results into files
+// Change the directory path in line 5 to a location where you want to store details
+// then uncomment lines 5 to 10
+
+// filePath = 'C:\\tempOutputDirectory\\'
+// fos = new java.io.FileOutputStream(filePath + testStepResult.testStep.label + '.txt', true)
+// pw = new java.io.PrintWriter(fos)
+// testStepResult.writeTo(pw)
+// pw.close()
+// fos.close()</con:script>
+  </con:eventHandlers>
+  <con:authRepository/>
+  <con:tags/>
+</con:soapui-project>
