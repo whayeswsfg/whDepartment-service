@@ -23,8 +23,6 @@ class DepartmentServiceTest {
 
     @Test
     void findDepartmentByID() {
-        //departmentRepository.findByDepartmentID(departmentID);
-       // long departmentID = this.
         assertTrue(true);
     }
 }
