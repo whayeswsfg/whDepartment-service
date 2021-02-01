@@ -8,6 +8,7 @@ class WhDepartmentServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
